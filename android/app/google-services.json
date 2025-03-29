@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "984720760286",
+    "project_id": "shoppeeapp-fc535",
+    "storage_bucket": "shoppeeapp-fc535.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984720760286:android:c5615c3e8649b5c04b114f",
+        "android_client_info": {
+          "package_name": "com.example.shoppywell"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSDQ_VmFFYCrIL_BezYs5jDpA_4bpaBKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,46 @@
+
+import 'package:shoppywell/src/domain/repositories/autentication_repository.dart';
+
+class AuthenticationRepositoryImpl implements AuthenticationRepository {
+  @override
+  void login({
+    required String email,
+    required String password,
+    required Function(dynamic loginResponse) onRequestSuccess,
+    required Function(Exception exception) onRequestFailure,
+  }) {
+    try {
+      // Simulating API call with Future.delayed
+      Future.microtask(() {
+        // Mock API response (Replace with actual API call)
+        // if (email == "test@example.com" && password == "password") {
+          onRequestSuccess({"message": "Login successful", "token": "xyz123"});
+        // } else {
+        //   onRequestFailure(Exception("Invalid credentials"));
+        // }
+      });
+    } catch (e) {
+      onRequestFailure(Exception(e.toString()));
+    }
+  }
+
+  @override
+  void register({
+    required String email,
+    required String password,
+    required Function(dynamic signUpResponse) onRequestSuccess,
+    required Function(Exception exception) onRequestFailure,
+  }) {
+    try {
+      // Simulating API call with Future.delayed
+      Future.delayed(Duration(seconds: 2), () {
+        // Mock API response (Replace with actual API call)
+
+          onRequestSuccess({"message": "Registration successful", "userId": 123});
+
+      });
+    } catch (e) {
+      onRequestFailure(Exception(e.toString()));
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import 'package:shoppywell/src/comman/routes.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_in_screen.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_up_screen.dart';
+import 'package:shoppywell/src/presentation/page/cart/cart.dart';
 import 'package:shoppywell/src/presentation/page/error/error_screen.dart';
 import 'package:shoppywell/src/presentation/page/home/home_page.dart';
 import 'package:shoppywell/src/presentation/page/initial_page/choose_products.dart';
@@ -82,7 +83,8 @@ GoRouter routerinit = GoRouter(
       name: AppRoutes.PROD_DTL_ROUTE_NAME,
       path: AppRoutes.PROD_DTL_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return  const ProductDetailPage();
+          final productId = state.uri.queryParameters['productId'];
+        return  ProductDetailPage(productId: productId);
       },
 
     ),
@@ -94,6 +96,17 @@ GoRouter routerinit = GoRouter(
       path: AppRoutes.PROFILE_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
         return   const ProfilePage();
+      },
+
+    ),
+    ///  =================================================================
+    /// ********************** Cart page Route ******************************
+    /// ==================================================================
+    GoRoute(
+      name: AppRoutes.CART_ROUTE_NAME,
+      path: AppRoutes.CART_ROUTE_PATH,
+      builder: (BuildContext context, GoRouterState state) {
+        return   const CartPage();
       },
 
     ),

@@ -64,4 +64,7 @@ class AppRoutes {
 
   static const String PROFILE_ROUTE_NAME =  'profile';
   static const String PROFILE_ROUTE_PATH = '/profile';
+
+  static const String CART_ROUTE_NAME =  'cart';
+  static const String CART_ROUTE_PATH = '/cart';
 }

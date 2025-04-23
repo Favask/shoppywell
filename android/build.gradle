@@ -19,6 +19,14 @@ allprojects {
         google()
         mavenCentral()
     }
+     // Force consistent Kotlin version across all modules
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'org.jetbrains.kotlin') {
+                details.useVersion kotlin_version
+            }
+        }
+    }
 }
 
 rootProject.buildDir = '../build'

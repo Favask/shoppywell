@@ -1,25 +1,50 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppywell/src/comman/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:shoppywell/src/presentation/bloc/product/product_bloc.dart';
+import 'package:shoppywell/src/presentation/bloc/product/product_event.dart';
+import 'package:shoppywell/src/presentation/bloc/product/product_state.dart';
 
 
 
-class TrendingProducts extends StatelessWidget {
+class TrendingProducts extends StatefulWidget {
   const TrendingProducts({Key? key}) : super(key: key);
 
+  @override
+  State<TrendingProducts> createState() => _TrendingProductsState();
+}
+
+class _TrendingProductsState extends State<TrendingProducts> {
+
+  @override
+  void initState() {
+     BlocProvider.of<ProductBloc>(context).add(LoadProducts());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            _buildAppBar(),
-            _buildSearchBar(),
-            _buildItemsHeader(),
-            Expanded(
-              child: _buildProductGrid(),
-            ),
-          ],
+        child:BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ProductLoaded) {
+            return Column(
+              children: [
+                _buildAppBar(),
+                _buildSearchBar(),
+                _buildItemsHeader(),
+                Expanded(
+                  child: _buildProductGrid(products: state.products),
+                ),
+              ],
+            );
+          }
+          return Container();
+                }
         ),
       ),
       bottomNavigationBar: _buildBottomNavBar(),
@@ -142,106 +167,7 @@ class TrendingProducts extends StatelessWidget {
     );
   }
 
-  Widget _buildProductGrid() {
-    final List<Map<String, dynamic>> products = [
-      {
-        'name': 'Black Winter',
-        'description': 'Autumn And Winter Casual Men Branded jacket...',
-        'price': 999,
-        'rating': 4.4,
-        'reviews': 4285,
-        'image': 'assets/black_winter.jpg',
-      },
-      {
-        'name': 'Mens Starry',
-        'description': 'Mens Starry Sky Printed Shirt 100% Cotton Fabric',
-        'price': 399,
-        'rating': 4.2,
-        'reviews': 132354,
-        'image': 'assets/starry_shirt.jpg',
-      },
-      {
-        'name': 'Black Dress',
-        'description': 'Solid Black Dress for Women, Sexy Chain Shorts Ladi...',
-        'price': 2000,
-        'rating': 4.5,
-        'reviews': 232446,
-        'image': 'assets/black_dress.jpg',
-      },
-      {
-        'name': 'Pink Embroide...',
-        'description': 'EARTHEN Rose Pink Embroidered Tiered Maxi...',
-        'price': 1900,
-        'rating': 4.3,
-        'reviews': 45678,
-        'image': 'assets/pink_dress.jpg',
-      },
-      {
-        'name': 'Flare Dress',
-        'description': 'Anthesis Black & Rust Orange Floral Print Tiered Midi F...',
-        'price': 1990,
-        'rating': 4.1,
-        'reviews': 435566,
-        'image': 'assets/flare_dress.jpg',
-      },
-      {
-        'name': 'denim dress',
-        'description': 'Blue cotton denim dress Look 2 Printed cotton dr...',
-        'price': 999,
-        'rating': 4.3,
-        'reviews': 27344,
-        'image': 'assets/denim_dress.jpg',
-      },
-      {
-        'name': 'Jordan Stay',
-        'description': 'The classic Air Jordan 12 to create a shoe that\'s fres...',
-        'price': 4999,
-        'rating': 3.8,
-        'reviews': 1023436,
-        'image': 'assets/jordan_shoes.jpg',
-      },
-      {
-        'name': 'Realme 7',
-        'description': '6 GB RAM | 64 GB ROM | Expandable Upto 256...',
-        'price': 3499,
-        'rating': 4.4,
-        'reviews': 2345567,
-        'image': 'assets/realme7.jpg',
-      },
-      {
-        'name': 'Sony PS4',
-        'description': 'Sony PS4 Console, 1TB Slim with 3 Games: Gran Ture...',
-        'price': 1999,
-        'rating': 4.1,
-        'reviews': 6345566,
-        'image': 'assets/ps4.jpg',
-      },
-      {
-        'name': 'Black Jacket 12...',
-        'description': 'This warm and comfortable jacket is great for learn...',
-        'price': 2999,
-        'rating': 4.2,
-        'reviews': 523456,
-        'image': 'assets/black_jacket.jpg',
-      },
-      {
-        'name': 'D7200 Digital C...',
-        'description': 'D7200 Digital Camera (Nikon) in New Area...',
-        'price': 26499,
-        'rating': 4.3,
-        'reviews': 87432,
-        'image': 'assets/camera.jpg',
-      },
-      {
-        'name': 'men\'s & boys s...',
-        'description': 'George Walker Derby Brown Formal Shoes',
-        'price': 999,
-        'rating': 4.4,
-        'reviews': 1043267,
-        'image': 'assets/formal_shoes.jpg',
-      },
-    ];
-
+  Widget _buildProductGrid({required List<Product> products}) {
     return GridView.builder(
       padding: const EdgeInsets.all(8.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -252,11 +178,15 @@ class TrendingProducts extends StatelessWidget {
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {
+        
         final product = products[index];
         return GestureDetector(
           onTap: () {
+                    print("-------------2------");
+
             context.pushNamed(
               AppRoutes.PROD_DTL_ROUTE_NAME,
+               queryParameters  : {'productId': product.id},
             );
           },
           child: Card(
@@ -278,7 +208,7 @@ class TrendingProducts extends StatelessWidget {
                         topRight: Radius.circular(8),
                       ),
                       image: DecorationImage(
-                        image: AssetImage(product['image']),
+                        image: NetworkImage(product.image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -295,7 +225,7 @@ class TrendingProducts extends StatelessWidget {
                       children: [
                         // Product Name
                         Text(
-                          product['name'],
+                          product.name,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -305,7 +235,7 @@ class TrendingProducts extends StatelessWidget {
                         ),
                         // Product Description
                         Text(
-                          product['description'],
+                          product.description,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[600],
@@ -315,7 +245,7 @@ class TrendingProducts extends StatelessWidget {
                         ),
                         // Product Price
                         Text(
-                          '₹${product['price']}',
+                          '₹${product.price}',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -328,7 +258,7 @@ class TrendingProducts extends StatelessWidget {
                               children: List.generate(
                                 5,
                                     (i) => Icon(
-                                  i < (product['rating']).floor()
+                                  i < (product.rating).floor()
                                       ? Icons.star
                                       : Icons.star_border,
                                   color: Colors.amber,
@@ -338,7 +268,7 @@ class TrendingProducts extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '${product['reviews']}',
+                              '${product.reviewCount}',
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Colors.grey[600],

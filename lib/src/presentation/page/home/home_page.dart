@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
               backgroundColor: Colors.red,
               child: ClipOval(
                 child: Image.network(
-                  'https://via.placeholder.com/36',
+                  'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                   width: 36,
                   height: 36,
                   fit: BoxFit.cover,
@@ -129,11 +129,11 @@ class HomePage extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    _buildCategoryItem('Beauty', 'https://via.placeholder.com/60'),
-                    _buildCategoryItem('Fashion', 'https://via.placeholder.com/60'),
-                    _buildCategoryItem('Kids', 'https://via.placeholder.com/60'),
-                    _buildCategoryItem('Mens', 'https://via.placeholder.com/60'),
-                    _buildCategoryItem('Womens', 'https://via.placeholder.com/60'),
+                    _buildCategoryItem('Beauty', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
+                    _buildCategoryItem('Fashion', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
+                    _buildCategoryItem('Kids', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
+                    _buildCategoryItem('Mens', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
+                    _buildCategoryItem('Womens', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
                   ],
                 ),
               ),
@@ -188,7 +188,7 @@ class HomePage extends StatelessWidget {
                           bottomRight: Radius.circular(12),
                         ),
                         child: Image.network(
-                          'https://via.placeholder.com/160x160',
+                          'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -253,7 +253,7 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: _buildProductCard(
                       'Women Printed Kurta',
-                      'https://via.placeholder.com/120',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       '₹1500',
                       '24% OFF',
                       4.5,
@@ -263,7 +263,7 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: _buildProductCard(
                       'HRX by Hrithik Roshan',
-                      'https://via.placeholder.com/120',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       '₹2499',
                       '20% OFF',
                       4.0,
@@ -283,7 +283,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.network(
-                      'https://via.placeholder.com/60',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       width: 60,
                       height: 60,
                     ),
@@ -321,7 +321,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.network(
-                      'https://via.placeholder.com/100',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       width: 100,
                       height: 100,
                       fit: BoxFit.cover,
@@ -415,7 +415,7 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: _buildProductCard(
                       'IWC Schaffhausen 2021 Pilot\'s Watch "SIHH 2019" 44mm',
-                      'https://via.placeholder.com/120',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       '₹620',
                       '60% OFF',
                       4.5,
@@ -425,7 +425,7 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: _buildProductCard(
                       'Labbit White Sneakers For Men and Female',
-                      'https://via.placeholder.com/120',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       '₹650',
                       '55% OFF',
                       4.0,
@@ -445,7 +445,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.network(
-                      'https://via.placeholder.com/120x120',
+                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                       width: 120,
                       height: 120,
                       fit: BoxFit.cover,
@@ -453,7 +453,7 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Image.network(
-                          'https://via.placeholder.com/200x80',
+                          'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
                           width: 200,
                           height: 80,
                           fit: BoxFit.contain,
@@ -521,7 +521,7 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: const DecorationImage(
-                    image: NetworkImage('https://via.placeholder.com/400x160'),
+                    image: NetworkImage('https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),

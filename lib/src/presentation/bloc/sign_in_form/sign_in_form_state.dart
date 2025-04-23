@@ -1,29 +1,94 @@
-
 abstract class AuthState {
-  late final String username;
-  late final String password;
+  final String username;
+  final String password;
 
-  AuthState({this.username = '', this.password = ''});
+  const AuthState({this.username = '', this.password = ''});
+
+  AuthState copyWith({
+    String? username,
+    String? password,
+  });
 }
 
-class AuthStateInitiate extends AuthState {}
+class AuthStateInitiate extends AuthState {
+  const AuthStateInitiate({String username = '', String password = ''})
+      : super(username: username, password: password);
 
-class AuthStateLoading extends AuthState {}
+  @override
+  AuthState copyWith({String? username, String? password}) {
+    return AuthStateInitiate(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
+}
+
+class AuthStateLoading extends AuthState {
+  const AuthStateLoading({String username = '', String password = ''})
+      : super(username: username, password: password);
+
+  @override
+  AuthState copyWith({String? username, String? password}) {
+    return AuthStateLoading(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
+}
 
 class LoginSuccessState extends AuthState {
   final Map<String, dynamic> loginResponse;
-  LoginSuccessState(this.loginResponse, {String username = '', String password = ''})
-      : super(username: username, password: password);
+
+  const LoginSuccessState(
+    this.loginResponse, {
+    String username = '',
+    String password = '',
+  }) : super(username: username, password: password);
+
+  @override
+  AuthState copyWith({String? username, String? password}) {
+    return LoginSuccessState(
+      loginResponse,
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
 }
 
 class LoginResponseState extends AuthState {
   final Map<String, dynamic> loginResponse;
-  LoginResponseState(this.loginResponse, {String username = '', String password = ''})
-      : super(username: username, password: password);
+
+  const LoginResponseState(
+    this.loginResponse, {
+    String username = '',
+    String password = '',
+  }) : super(username: username, password: password);
+
+  @override
+  AuthState copyWith({String? username, String? password}) {
+    return LoginResponseState(
+      loginResponse,
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
 }
 
 class SignUpResponseState extends AuthState {
   final Map<String, dynamic> signUpResponse;
-  SignUpResponseState(this.signUpResponse, {String username = '', String password = ''})
-      : super(username: username, password: password);
+
+  const SignUpResponseState(
+    this.signUpResponse, {
+    String username = '',
+    String password = '',
+  }) : super(username: username, password: password);
+
+  @override
+  AuthState copyWith({String? username, String? password}) {
+    return SignUpResponseState(
+      signUpResponse,
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
 }

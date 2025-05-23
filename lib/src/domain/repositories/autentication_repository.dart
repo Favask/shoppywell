@@ -1,12 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthenticationRepository {
-  void login({
+  Future<Map<String, dynamic>> login({
     required String email,
     required String password,
-    required Function(dynamic loginResponse) onRequestSuccess,
-    required Function(Exception exception) onRequestFailure,
   });
 
   void register({

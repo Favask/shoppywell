@@ -4,7 +4,7 @@ import 'package:shoppywell/src/presentation/page/auth/sign_up_screen.dart';
 import 'package:shoppywell/src/presentation/page/cart/cart.dart';
 import 'package:shoppywell/src/presentation/page/error/error_screen.dart';
 import 'package:shoppywell/src/presentation/page/home/home_page.dart';
-import 'package:shoppywell/src/presentation/page/initial_page/choose_products.dart';
+import 'package:shoppywell/src/presentation/page/initial_page/initial_page_view.dart';
 import 'package:shoppywell/src/presentation/page/product/product_detail.dart';
 import 'package:shoppywell/src/presentation/page/product/trending_products.dart';
 import 'package:shoppywell/src/presentation/page/profile/progile.dart';

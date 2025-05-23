@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:shoppywell/src/comman/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-
-
+import 'package:shoppywell/src/utilities/constants.dart';
+import 'package:shoppywell/src/utilities/shared_prefs_helper.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,10 +15,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.black),
-          onPressed: () {},
-        ),
         title: Row(
           children: [
             const Text(
@@ -44,26 +41,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              context.pushNamed(AppRoutes.PROFILE_ROUTE_NAME);
-            },
-            child: CircleAvatar(
-              radius: 18,
-              backgroundColor: Colors.red,
-              child: ClipOval(
-                child: Image.network(
-                  'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                  width: 36,
-                  height: 36,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,298 +49,6 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              // Search Bar
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search any Product...',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: const Icon(Icons.mic),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Categories
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'All Featured',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Text('Sort'),
-                        label: const Icon(Icons.sort, size: 18),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Text('Filter'),
-                        label: const Icon(Icons.filter_list, size: 18),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Category icons
-              SizedBox(
-                height: 90,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _buildCategoryItem('Beauty', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                    _buildCategoryItem('Fashion', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                    _buildCategoryItem('Kids', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                    _buildCategoryItem('Mens', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                    _buildCategoryItem('Womens', 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                  ],
-                ),
-              ),
-
-              // Banner
-              Container(
-                height: 160,
-                margin: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  color: Colors.pink[100],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              '50-40% OFF',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text('Most in-demand!\nAll colors'),
-                            const SizedBox(height: 12),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.pink,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                              ),
-                              child: const Text('Shop Now →'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(12),
-                          bottomRight: Radius.circular(12),
-                        ),
-                        child: Image.network(
-                          'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Deal of the day
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.timer, color: Colors.white),
-                        const SizedBox(width: 8),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Deal of the Day',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '22h 55m 20s remaining',
-                              style: TextStyle(color: Colors.white, fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      ),
-                      child: const Row(
-                        children: [
-                          Text('View all', style: TextStyle(color: Colors.blue)),
-                          Icon(Icons.arrow_forward, size: 16, color: Colors.blue),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Deal products
-              Row(
-                children: [
-                  Expanded(
-                    child: _buildProductCard(
-                      'Women Printed Kurta',
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      '₹1500',
-                      '24% OFF',
-                      4.5,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _buildProductCard(
-                      'HRX by Hrithik Roshan',
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      '₹2499',
-                      '20% OFF',
-                      4.0,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Special offers
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.amber[50],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    Image.network(
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      width: 60,
-                      height: 60,
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Special Offers',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            'We make sure you get the offer you need at best prices',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Flat and Heels
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    Image.network(
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Flat and Heels',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            'Stand a chance to get rewarded',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      ),
-                      child: const Text('Visit now →'),
-                    ),
-                    const SizedBox(width: 12),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-
               // Trending Products
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -434,136 +119,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-
-              // Summer Sale
-              Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.orange[50],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Image.network(
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.cover,
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Image.network(
-                          'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                          width: 200,
-                          height: 80,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // New Arrivals
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'New Arrivals',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'Summer\'25 Collections',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    ),
-                    child: const Row(
-                      children: [
-                        Text('View all'),
-                        Icon(Icons.arrow_forward, size: 16),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Sponsored
-              const Text(
-                'Sponsered',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 8),
-
-              // Sponsored Banner
-              Container(
-                height: 160,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: const DecorationImage(
-                    image: NetworkImage('https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        color: Colors.white.withOpacity(0.8),
-                        child: const Text(
-                          'UP TO\n50% OFF',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Last banner
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'up to 50% Off',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Icon(Icons.arrow_forward),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -593,34 +148,6 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Setting',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCategoryItem(String title, String imageUrl) {
-    return Container(
-      width: 70,
-      margin: const EdgeInsets.only(right: 12),
-      child: Column(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12),
           ),
         ],
       ),
@@ -711,7 +238,7 @@ class HomePage extends StatelessWidget {
                     Row(
                       children: List.generate(
                         5,
-                            (index) => Icon(
+                        (index) => Icon(
                           index < rating.floor()
                               ? Icons.star
                               : (index < rating ? Icons.star_half : Icons.star_border),

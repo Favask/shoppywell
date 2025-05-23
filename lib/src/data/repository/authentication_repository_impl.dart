@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -17,24 +19,41 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   
   @override
-  void login({
+  Future<Map<String, dynamic>> login({
     required String email,
     required String password,
-    required Function(dynamic loginResponse) onRequestSuccess,
-    required Function(Exception exception) onRequestFailure,
-  }) {
+  }) async {
     try {
-      // Simulating API call with Future.microtask
-      Future.microtask(() {
-        // Mock API response (Replace with actual API call)
-        // if (email == "test@example.com" && password == "password") {
-          onRequestSuccess({"message": "Login successful", "token": "xyz123"});
-        // } else {
-        //   onRequestFailure(Exception("Invalid credentials"));
-        // }
-      });
+      final UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return {
+        "message": "Login successful",
+        "user": userCredential.user,
+        "token": await userCredential.user?.getIdToken()
+      };
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'No user found with this email.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Wrong password provided.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'The email address is not valid.';
+          break;
+        case 'user-disabled':
+          errorMessage = 'This user account has been disabled.';
+          break;
+        default:
+          errorMessage = 'An error occurred during login.';
+      }
+      throw Exception(errorMessage);
     } catch (e) {
-      onRequestFailure(Exception(e.toString()));
+      throw Exception(e.toString());
     }
   }
 
@@ -88,7 +107,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return AuthResult(errorMessage: e.toString());
     }
   }
-  
+
+
   // Sign in with Facebook
   @override
   Future<AuthResult> signInWithFacebook() async {
@@ -123,7 +143,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return AuthResult(errorMessage: e.toString());
     }
   }
-  
+
   // Sign out
   @override
   Future<void> signOut() async {
@@ -131,7 +151,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       await Future.wait([
         _firebaseAuth.signOut(),
         _googleSignIn.signOut(),
-        _facebookAuth.logOut(),
+        //_facebookAuth.logOut(),
       ]);
     } catch (e) {
       throw Exception("Error signing out: $e");
@@ -170,4 +190,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   bool isUserLoggedIn() {
     return currentUser != null;
   }
+  
+  
 }

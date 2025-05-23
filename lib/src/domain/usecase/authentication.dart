@@ -4,8 +4,7 @@ import 'package:shoppywell/src/domain/repositories/autentication_repository.dart
 class AuthenticationUseCase {
   final AuthenticationRepository _repository=AuthenticationRepositoryImpl();
 
-  Future<void> login({required String email, required String password,    required Function(dynamic loginResponse) onRequestSuccess,
-    required Function(Exception exception) onRequestFailure}) async {
-     _repository.login(email: email, password: password, onRequestSuccess: onRequestSuccess, onRequestFailure: onRequestFailure);
+  Future<Map<String, dynamic>> login({required String email, required String password}) async {
+    return await _repository.login(email: email, password: password);
   }
 }

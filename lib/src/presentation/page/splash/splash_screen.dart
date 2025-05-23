@@ -3,6 +3,10 @@ import 'package:shoppywell/src/comman/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_bloc.dart';
+import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_event.dart';
+import 'package:shoppywell/src/utilities/constants.dart';
+import 'package:shoppywell/src/utilities/shared_prefs_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,10 +18,38 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
-      context.replaceNamed(AppRoutes.CHOOSE_PROD_INIT_ROUTE_NAME);
-    });
     super.initState();
+    _checkFirstLaunch();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final isFirstLaunch = await SharedPrefsHelper.checkFirstLaunch();
+    if (mounted) {
+      if (isFirstLaunch) {
+        // Navigate to initial pages
+        context.goNamed(AppRoutes.CHOOSE_PROD_INIT_ROUTE_NAME);
+      } else {
+        // Check for auto login
+        await _checkAuth();
+      }
+    }
+  }
+
+  Future<void> _checkAuth() async {
+    String? username = await SharedPrefsHelper.getString(Constants.username);
+    String? password = await SharedPrefsHelper.getString(Constants.password);
+    
+    if (mounted) {
+      if (username != null && password != null && username.isNotEmpty && password.isNotEmpty) {
+        // Auto login with stored credentials
+        context.read<AuthBloc>().add(LoginEvent(email: username, password: password));
+        // Navigate to home page
+        context.goNamed(AppRoutes.HOME_ROUTE_NAME);
+      } else {
+        // No stored credentials, go to login page
+        context.goNamed(AppRoutes.LOGIN_ROUTE_NAME);
+      }
+    }
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/domain/repositories/product.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
@@ -17,7 +17,7 @@ class ProductRepositoryImpl extends ProductRepository {
       print("-----snapshot-----${snapshot}");
       print("-----snapshot-----${snapshot.docs}");
       final products = snapshot.docs
-          .map((doc) => Product.fromMap(doc.data(), doc.id))
+          .map((doc) => Product.fromMap(doc.data(), doc.id ))
           .toList();
       print("-----products-----${products.length}");
       return products;

@@ -15,16 +15,16 @@ import 'package:shoppywell/src/utilities/shared_prefs_helper.dart';
 
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthStateInitiate()) {
+  AuthBloc() : super(const AuthStateInitiate(username:  '', password: ''))  {
     final AuthenticationUseCase useCase = AuthenticationUseCase();
 
     on<LoginEvent>((event, emit) async {
-      emit(AuthStateLoading(
-        username: state.username,
-        password: state.password,
-      ));
-      log("-----------SharedPrefsHelper.getString(Constants.username)--${await SharedPrefsHelper.getString(Constants.username)}");
-      log("-----------SharedPrefsHelper.getString(Constants.password)--${await SharedPrefsHelper.getString(Constants.password)}");
+      // emit(AuthStateLoading(
+      //   username: state.username,
+      //   password: state.password,
+      // ));
+      log("-----------SharedPrefsHelper.getString(Constants.username)--${await SharedPrefsHelper.getString(Constants.username_key)}");
+      log("-----------SharedPrefsHelper.getString(Constants.password)--${await SharedPrefsHelper.getString(Constants.password_key)}");
       log("-----------event.email--${event.email}");
       log("-----------event.password--${event.password}");
       try {
@@ -33,12 +33,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: event.password,
         );
         // Store credentials for auto login
-        await SharedPrefsHelper.saveLoginCredentials(state.username, state.password);
+        print("---response--${response.toString()}");
         emit(LoginSuccessState(
           response,
           username: state.username,
           password: state.password,
         ));
+
+        print("---event.email--${event.email}");
+        print("---event.password--${event.password}");
+
+        SharedPrefsHelper.setString(Constants.username_key,event.email );
+        SharedPrefsHelper.setString(Constants.password_key, event.password);
       } catch (exception) {
         emit(AuthStateInitiate(
           username: state.username,

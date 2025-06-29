@@ -36,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkAuth() async {
-    String? username = await SharedPrefsHelper.getString(Constants.username);
-    String? password = await SharedPrefsHelper.getString(Constants.password);
+    String? username = await SharedPrefsHelper.getString(Constants.username_key);
+    String? password = await SharedPrefsHelper.getString(Constants.password_key);
     
     if (mounted) {
       if (username != null && password != null && username.isNotEmpty && password.isNotEmpty) {

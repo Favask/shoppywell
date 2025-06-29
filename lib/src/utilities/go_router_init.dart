@@ -2,10 +2,12 @@ import 'package:shoppywell/src/comman/routes.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_in_screen.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_up_screen.dart';
 import 'package:shoppywell/src/presentation/page/cart/cart.dart';
+import 'package:shoppywell/src/presentation/page/dashboard/main_dashboard.dart';
 import 'package:shoppywell/src/presentation/page/error/error_screen.dart';
 import 'package:shoppywell/src/presentation/page/home/home_page.dart';
 import 'package:shoppywell/src/presentation/page/initial_page/initial_page_view.dart';
 import 'package:shoppywell/src/presentation/page/product/product_detail.dart';
+import 'package:shoppywell/src/presentation/page/product/comprehensive_product_detail.dart';
 import 'package:shoppywell/src/presentation/page/product/trending_products.dart';
 import 'package:shoppywell/src/presentation/page/profile/progile.dart';
 import 'package:shoppywell/src/presentation/page/splash/splash_screen.dart';
@@ -57,13 +59,13 @@ GoRouter routerinit = GoRouter(
 
     ),
     ///  =================================================================
-    /// ********************** Initial pages Route ******************************
+    /// ********************** Main Dashboard Route ******************************
     /// ==================================================================
     GoRoute(
       name: AppRoutes.HOME_ROUTE_NAME,
       path: AppRoutes.HOME_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return  HomePage();
+        return const MainDashboard();
       },
 
     ),
@@ -88,6 +90,15 @@ GoRouter routerinit = GoRouter(
       },
 
     ),
+    // GoRoute(
+    //   name: AppRoutes.COMPREHENSIVE_PROD_DTL_ROUTE_NAME,
+    //   path: AppRoutes.COMPREHENSIVE_PROD_DTL_ROUTE_PATH,
+    //   builder: (BuildContext context, GoRouterState state) {
+    //       final productId = state.uri.queryParameters['productId'];
+    //     return  ComprehensiveProductDetailPage(productId: productId);
+    //   },
+
+    // ),
     ///  =================================================================
     /// ********************** Profile pages Route ******************************
     /// ==================================================================

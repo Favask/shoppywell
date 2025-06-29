@@ -1,10 +1,10 @@
-import 'package:shoppywell/src/data/model/product_detail.dart';
-import 'package:shoppywell/src/data/model/product_model.dart';
+
+import 'package:shoppywell/src/data/models/product_model.dart';
 
 abstract class ProductDetailRepository {
   Future<ProductModel> getProductById(String productId);
   Future<List<Product>> getSimilarProducts(
-      String category, int currentProductId);
+      String category, String? currentProductId);
 
-  Future<void> addToCart(int productId, String userId);
+  Future<void> addToCart(int productId, String? userId);
 }

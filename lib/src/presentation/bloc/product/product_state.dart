@@ -1,6 +1,6 @@
 // bloc/product_state.dart
 import 'package:equatable/equatable.dart';
-import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 
 abstract class ProductState extends Equatable {
   const ProductState();

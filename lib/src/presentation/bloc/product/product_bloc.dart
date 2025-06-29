@@ -1,8 +1,6 @@
-import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/domain/usecase/product.dart';
 import 'product_event.dart';
 import 'product_state.dart';

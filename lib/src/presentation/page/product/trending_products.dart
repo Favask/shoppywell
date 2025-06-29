@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppywell/src/comman/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/presentation/bloc/product/product_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/product/product_event.dart';
 import 'package:shoppywell/src/presentation/bloc/product/product_state.dart';
@@ -208,7 +208,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         topRight: Radius.circular(8),
                       ),
                       image: DecorationImage(
-                        image: NetworkImage(product.image),
+                        image: NetworkImage(product.images[0]),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -245,7 +245,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         ),
                         // Product Price
                         Text(
-                          '₹${product.price}',
+                          '₹${product.salePrice}',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,

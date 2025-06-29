@@ -62,6 +62,9 @@ class AppRoutes {
   static const String PROD_DTL_ROUTE_NAME =  'prod_dtl';
   static const String PROD_DTL_ROUTE_PATH = '/prod_dtl';
 
+  static const String COMPREHENSIVE_PROD_DTL_ROUTE_NAME =  'comprehensive_prod_dtl';
+  static const String COMPREHENSIVE_PROD_DTL_ROUTE_PATH = '/comprehensive_prod_dtl';
+
   static const String PROFILE_ROUTE_NAME =  'profile';
   static const String PROFILE_ROUTE_PATH = '/profile';
 

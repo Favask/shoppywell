@@ -1,4 +1,5 @@
-import 'package:shoppywell/src/data/model/product_model.dart';
+
+import 'package:shoppywell/src/data/models/product_model.dart';
 
 abstract class ProductRepository {
   Future<List<Product>> getProducts({

@@ -1,4 +1,4 @@
-import 'package:shoppywell/src/data/model/product_model.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/data/repository/product_repo.dart';
 import 'package:shoppywell/src/domain/repositories/product.dart';
 

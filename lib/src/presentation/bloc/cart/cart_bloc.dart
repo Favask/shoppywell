@@ -32,7 +32,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
-        final totalAmount = products.fold<double>(0, (sum, product) => sum + product.salePrice);
+        final totalAmount = products.fold<double>(0, (sum, product) => sum + (product.salePrice??0));
         final totalItems = products.length;
         emit(CartLoaded(
           products: products,
@@ -69,7 +69,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
-        final totalAmount = products.fold<double>(0, (sum, product) => sum + product.salePrice);
+        final totalAmount = products.fold<double>(0, (sum, product) => sum + (product.salePrice??0));
         final totalItems = products.length;
         emit(CartLoaded(
           products: products,
@@ -100,7 +100,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
-        final totalAmount = products.fold<double>(0, (sum, product) => sum + product.salePrice);
+        final totalAmount = products.fold<double>(0, (sum, product) => sum + (product.salePrice ?? 0));
         final totalItems = products.length;
         emit(CartLoaded(
           products: products,
@@ -131,7 +131,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
-        final totalAmount = products.fold<double>(0, (sum, product) => sum + product.salePrice);
+        final totalAmount = products.fold<double>(0, (sum, product) => sum +( product.salePrice ??0));
         final totalItems = products.length;
         emit(CartLoaded(
           products: products,

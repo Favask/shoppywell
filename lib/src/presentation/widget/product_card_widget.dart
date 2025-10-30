@@ -75,7 +75,7 @@ class ProductCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.name ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -85,7 +85,7 @@ class ProductCardWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    product.description,
+                    product.description??'',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -97,7 +97,7 @@ class ProductCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '₹${product.salePrice.toStringAsFixed(2)}',
+                        '₹${product.salePrice?.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class ProductCardWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        product.rating.toStringAsFixed(1),
+                        product.rating?.toStringAsFixed(1) ?? "0.0",
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[600],

@@ -1,34 +1,33 @@
 
-import 'package:equatable/equatable.dart';
 
 class ProductModel extends Product {
-  const ProductModel({
-    required super.id,
-    required super.name,
-    required super.description,
-    required super.brand,
-    required super.categoryId,
-    required super.originalPrice,
-    required super.salePrice,
-    required super.discountPercentage,
-    required super.images,
-    required super.thumbnailUrl,
-    required super.colors,
-    required super.sizes,
-    required super.stockQuantity,
-    required super.isInStock,
-    required super.rating,
-    required super.reviewCount,
-    required super.tags,
-    required super.isActive,
-    required super.isFeatured,
-    required super.isTrending,
+  ProductModel({
+     super.id,
+     super.name,
+     super.description,
+     super.brand,
+     super.categoryId,
+     super.originalPrice,
+     super.salePrice,
+     super.discountPercentage,
+     super.images,
+     super.thumbnailUrl,
+     super.colors,
+     super.sizes,
+     super.stockQuantity,
+     super.isInStock,
+     super.rating,
+     super.reviewCount,
+     super.tags,
+     super.isActive,
+     super.isFeatured,
+     super.isTrending,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     print("--ProductModel-json-${json}");
     return ProductModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String,
       brand: json['brand'] as String,
@@ -79,49 +78,49 @@ class ProductModel extends Product {
 
 
 
-class Product extends Equatable {
-  final String id;
-  final String name;
-  final String description;
-  final String brand;
-  final String categoryId;
-  final double originalPrice;
-  final double salePrice;
-  final int discountPercentage;
-  final List<String> images;
-  final String thumbnailUrl;
-  final List<String> colors;
-  final List<String> sizes;
-  final int stockQuantity;
-  final bool isInStock;
-  final double rating;
-  final int reviewCount;
-  final List<String> tags;
+class Product  {
+  final String? id;
+  final String? name;
+  final String? description;
+  final String? brand;
+  final String? categoryId;
+  final double? originalPrice;
+  final double? salePrice;
+  final int? discountPercentage;
+  List<String> images=[];
+  final String? thumbnailUrl;
+  List<String> colors=[];
+  List<String> sizes=[];
+  final int? stockQuantity;
+  final bool? isInStock;
+  final double? rating;
+  final int? reviewCount;
+  List<String> tags=[];
   final bool isActive;
   final bool isFeatured;
   final bool isTrending;
 
-  const Product({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.brand,
-    required this.categoryId,
-    required this.originalPrice,
-    required this.salePrice,
-    required this.discountPercentage,
-    required this.images,
-    required this.thumbnailUrl,
-    required this.colors,
-    required this.sizes,
-    required this.stockQuantity,
-    required this.isInStock,
-    required this.rating,
-    required this.reviewCount,
-    required this.tags,
-    required this.isActive,
-    required this.isFeatured,
-    required this.isTrending,
+  Product({
+      this.id,
+      this.name,
+      this.description,
+      this.brand,
+      this.categoryId,
+      this.originalPrice,
+      this.salePrice,
+      this.discountPercentage,
+      this.images=const [],
+      this.thumbnailUrl,
+      this.colors=const [],
+      this.sizes=const [],
+      this.stockQuantity,
+      this.isInStock,
+      this.rating,
+      this.reviewCount,
+      this.tags=const [],
+      this.isActive = false,
+      this.isFeatured = false,
+      this.isTrending = false,
   });
 
    factory Product.fromMap(Map<String, dynamic> map, String documentId) {
@@ -150,29 +149,4 @@ class Product extends Equatable {
     );
   }
 
- 
-  @override
-
-  List<Object?> get props => [
-        id,
-        name,
-        description,
-        brand,
-        categoryId,
-        originalPrice,
-        salePrice,
-        discountPercentage,
-        images,
-        thumbnailUrl,
-        colors,
-        sizes,
-        stockQuantity,
-        isInStock,
-        rating,
-        reviewCount,
-        tags,
-        isActive,
-        isFeatured,
-        isTrending,
-      ];
 } 

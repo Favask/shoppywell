@@ -225,7 +225,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                       children: [
                         // Product Name
                         Text(
-                          product.name,
+                          product.name ??'',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -235,7 +235,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         ),
                         // Product Description
                         Text(
-                          product.description,
+                          product.description??"",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[600],
@@ -258,7 +258,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                               children: List.generate(
                                 5,
                                     (i) => Icon(
-                                  i < (product.rating).floor()
+                                  i < ((product.rating)?.floor()??0)
                                       ? Icons.star
                                       : Icons.star_border,
                                   color: Colors.amber,

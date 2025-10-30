@@ -238,7 +238,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         // ),
         const SizedBox(height: 8),
         Text(
-          product.name,
+          product.name ?? "",
           style: theme.textTheme.titleLarge?.copyWith(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -251,9 +251,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               children: List.generate(
                 5,
                 (index) => Icon(
-                  index < product.rating.floor()
+                  index < (product.rating?.floor()??0)
                       ? Icons.star
-                      : (index < product.rating
+                      : (index < (product.rating??0)
                           ? Icons.star_half
                           : Icons.star_border),
                   color: Colors.amber,
@@ -274,9 +274,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         const SizedBox(height: 16),
         Row(
           children: [
-            if (product.discountPercentage > 0) ...[
+            if ((product.discountPercentage ?? 0 )> 0) ...[
               Text(
-                '₹${product.originalPrice.toStringAsFixed(0)}',
+                '₹${product.originalPrice?.toStringAsFixed(0)}',
                 style: theme.textTheme.bodySmall?.copyWith(
                   fontSize: 16,
                   color: theme.hintColor,
@@ -286,14 +286,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               const SizedBox(width: 8),
             ],
             Text(
-              '₹${product.salePrice.toStringAsFixed(0)}',
+              '₹${product.salePrice?.toStringAsFixed(0)}',
               style: theme.textTheme.titleLarge?.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
               ),
             ),
-            if (product.discountPercentage > 0) ...[
+            if ((product.discountPercentage ?? 0 ) > 0) ...[
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

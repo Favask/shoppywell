@@ -260,7 +260,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     final currentState = state;
     if (currentState is ProductDetailLoaded) {
       // Use a reasonable max quantity since ProductModel doesn't have stockQuantity
-      final maxQuantity = 10; // Default max quantity
+      const maxQuantity = 10; // Default max quantity
       final newQuantity = event.quantity.clamp(1, maxQuantity);
       emit(currentState.copyWith(quantity: newQuantity));
     }

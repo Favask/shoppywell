@@ -106,11 +106,11 @@ class _TrendingProductsState extends State<TrendingProducts> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Row(
+        child: const Row(
           children: [
-            const Icon(Icons.search, color: Colors.grey),
-            const SizedBox(width: 8.0),
-            const Expanded(
+            Icon(Icons.search, color: Colors.grey),
+            SizedBox(width: 8.0),
+            Expanded(
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search any Product...',
@@ -119,7 +119,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                 ),
               ),
             ),
-            const Icon(Icons.mic, color: Colors.grey),
+            Icon(Icons.mic, color: Colors.grey),
           ],
         ),
       ),

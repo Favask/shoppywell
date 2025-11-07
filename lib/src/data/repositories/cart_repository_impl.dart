@@ -25,7 +25,7 @@ class CartRepositoryImpl implements CartRepository {
       final products = <Product>[];
       for (final productId in cartIds) {
         try {
-          final productDoc = await _firestore.collection('products').doc("$productId").get();
+          final productDoc = await _firestore.collection('products').doc(productId).get();
           if (productDoc.exists) {
             final productData = productDoc.data() as Map<String, dynamic>;
             final product = Product.fromMap(productData, productId);

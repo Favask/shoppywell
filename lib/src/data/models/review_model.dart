@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import '../../domain/entities/review.dart';
 
 class ReviewModel extends Review {

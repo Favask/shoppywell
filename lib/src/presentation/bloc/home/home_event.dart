@@ -1,10 +1,7 @@
-import 'package:equatable/equatable.dart';
 
-abstract class HomeEvent extends Equatable {
+abstract class HomeEvent {
   const HomeEvent();
 
-  @override
-  List<Object?> get props => [];
 }
 
 class LoadHomeData extends HomeEvent {
@@ -24,6 +21,5 @@ class SelectCategory extends HomeEvent {
 
   const SelectCategory(this.categoryId);
 
-  @override
-  List<Object?> get props => [categoryId];
+
 } 

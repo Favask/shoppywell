@@ -200,7 +200,7 @@ class HomePageShimmerLoading extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
                       children: [
-                        CircleAvatar(radius: 30, backgroundColor: Colors.white),
+                        const CircleAvatar(radius: 30, backgroundColor: Colors.white),
                         const SizedBox(height: 4),
                         Container(width: 50, height: 10, color: Colors.white),
                       ],

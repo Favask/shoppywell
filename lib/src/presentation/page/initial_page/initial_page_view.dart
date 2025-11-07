@@ -201,7 +201,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         final width = constraints.maxWidth;
         final height = constraints.maxHeight * 0.8;
 
-        return Container(
+        return SizedBox(
           width: width,
           height: height,
           child: SvgPicture.asset(

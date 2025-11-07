@@ -21,7 +21,7 @@ class DealOfDayWidget extends StatefulWidget {
 
 class _DealOfDayWidgetState extends State<DealOfDayWidget> {
   // TODO: Implement timer logic
-  String _timeRemaining = 'Loading...';
+  final String _timeRemaining = 'Loading...';
 
   @override
   Widget build(BuildContext context) {

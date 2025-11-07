@@ -102,10 +102,10 @@ class HomePage extends StatelessWidget {
                 color: Colors.pink[100], // Placeholder color based on the image
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Stack(
+              child: const Stack(
                 children: [
                   // TODO: Add background image for the banner
-                  const Center(
+                  Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -165,7 +165,7 @@ class HomePage extends StatelessWidget {
                         color: Colors.blue[800], // Placeholder color
                         size: 20,
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Text(
                         '22h 55m 20s remaining', // Placeholder timer text
                         style: TextStyle(
@@ -185,7 +185,7 @@ class HomePage extends StatelessWidget {
                           'View all',
                           style: TextStyle(color: Colors.blue[800]), // Placeholder color
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Icon(
                           Icons.arrow_forward,
                           size: 18,
@@ -292,7 +292,7 @@ class HomePage extends StatelessWidget {
                           'View all',
                           style: TextStyle(color: Colors.blue[800]), // Placeholder color
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Icon(
                           Icons.arrow_forward,
                           size: 18,
@@ -421,11 +421,11 @@ class HomePage extends StatelessWidget {
                 color: Colors.brown[100], // Placeholder color based on the image
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Stack(
+              child: const Stack(
                 alignment: Alignment.center,
                 children: [
                   // TODO: Add background image for the sponsored banner
-                  const Text(
+                  Text(
                     'UP TO\n50% OFF',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -446,7 +446,7 @@ class HomePage extends StatelessWidget {
                     right: 10,
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           'up to 50% Off', // Text below the banner
                           style: TextStyle(
                             fontSize: 14,
@@ -454,7 +454,7 @@ class HomePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 5),
+                        SizedBox(width: 5),
                         Icon(
                           Icons.arrow_forward_ios,
                           size: 14,

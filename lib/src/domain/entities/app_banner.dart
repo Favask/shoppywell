@@ -1,6 +1,5 @@
-import 'package:equatable/equatable.dart';
 
-class AppBanner extends Equatable {
+class AppBanner {
   final String id;
   final String title;
   final String subtitle;
@@ -23,16 +22,5 @@ class AppBanner extends Equatable {
     required this.isActive,
   });
 
-  @override
-  List<Object?> get props => [
-        id,
-        title,
-        subtitle,
-        imageUrl,
-        ctaText,
-        ctaLink,
-        backgroundColor,
-        textColor,
-        isActive,
-      ];
+
 } 

@@ -25,7 +25,7 @@ class WishlistRepositoryImpl implements WishlistRepository {
       final products = <Product>[];
       for (final productId in wishlistIds) {
         try {
-          final productDoc = await _firestore.collection('products').doc("$productId").get();
+          final productDoc = await _firestore.collection('products').doc(productId).get();
           if (productDoc.exists) {
             final productData = productDoc.data() as Map<String, dynamic>;
             final product = Product.fromMap(productData, productId);

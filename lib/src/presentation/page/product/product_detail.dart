@@ -166,7 +166,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   Widget _buildImageGallery(ProductDetailLoaded state, ThemeData theme) {
     final product = state.product;
-    return Container(
+    return SizedBox(
       height: 400,
       child: Stack(
         children: [
@@ -346,7 +346,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final selectedSize = product.sizes.isNotEmpty 
         ? product.sizes[state.currentSizeIndex].toString() 
         : '';
-    final selectedColor = 'Default'; // Replace with actual color selection if available
+    const selectedColor = 'Default'; // Replace with actual color selection if available
     return SizedBox(
       width: double.infinity,
       height: 50,

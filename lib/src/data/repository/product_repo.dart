@@ -14,7 +14,7 @@ class ProductRepositoryImpl extends ProductRepository {
       required Function(Exception exception) onRequestFailure}) async {
     try {
       final snapshot = await _firestore.collection('product').get();
-      print("-----snapshot-----${snapshot}");
+      print("-----snapshot-----$snapshot");
       print("-----snapshot-----${snapshot.docs}");
       final products = snapshot.docs
           .map((doc) => Product.fromMap(doc.data(), doc.id ))

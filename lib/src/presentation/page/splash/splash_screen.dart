@@ -1,5 +1,5 @@
 import 'package:flutter_svg/svg.dart';
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             // color: Colors.black,

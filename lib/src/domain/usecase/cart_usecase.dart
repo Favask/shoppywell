@@ -5,6 +5,10 @@ import 'package:shoppywell/src/data/repositories/cart_repository_impl.dart';
 class CartUsecase {
   final CartRepository _repository = CartRepositoryImpl();
 
+  Future<String> getUserId(String uid) {
+    return _repository.getUserId(uid);
+  }
+
   Future<List<Product>> getCartProducts(String userId) {
     return _repository.getCartProducts(userId);
   }

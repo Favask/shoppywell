@@ -1,10 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:shoppywell/src/data/models/product_model.dart';
 import '../../../domain/entities/app_banner.dart';
 import '../../../domain/entities/category.dart';
 import '../../../domain/entities/deal.dart';
 
-abstract class HomeState extends Equatable {
+abstract class HomeState {
   const HomeState();
 
   @override

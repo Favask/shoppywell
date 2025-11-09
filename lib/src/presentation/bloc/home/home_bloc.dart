@@ -43,7 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         banners: homeData.banners,
         deals: homeData.deals,
       ));
-    } catch (e, stacktrace) {
+    } catch (e) {
       emit(HomeError(e.toString()));
     }
   }
@@ -65,7 +65,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         banners: homeData.banners,
         deals: homeData.deals,
       ));
-    } catch (e, stacktrace) {
+    } catch (e) {
       emit(HomeError(e.toString()));
     }
   }
@@ -96,7 +96,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ],
           hasReachedMax: homeData.featuredProducts.isEmpty, // This logic is likely incorrect without proper pagination
         ));
-      } catch (e, stacktrace) {
+      } catch (e) {
         emit(HomeError(e.toString()));
       }
     }

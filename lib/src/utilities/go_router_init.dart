@@ -1,14 +1,10 @@
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_in_screen.dart';
 import 'package:shoppywell/src/presentation/page/auth/sign_up_screen.dart';
-import 'package:shoppywell/src/presentation/page/cart/cart.dart';
 import 'package:shoppywell/src/presentation/page/dashboard/main_dashboard.dart';
 import 'package:shoppywell/src/presentation/page/error/error_screen.dart';
-import 'package:shoppywell/src/presentation/page/home/home_page.dart';
 import 'package:shoppywell/src/presentation/page/initial_page/initial_page_view.dart';
 import 'package:shoppywell/src/presentation/page/product/product_detail.dart';
-import 'package:shoppywell/src/presentation/page/product/comprehensive_product_detail.dart';
-import 'package:shoppywell/src/presentation/page/product/trending_products.dart';
 import 'package:shoppywell/src/presentation/page/profile/progile.dart';
 import 'package:shoppywell/src/presentation/page/splash/splash_screen.dart';
 import 'package:shoppywell/src/utilities/logger.dart';
@@ -73,14 +69,7 @@ GoRouter routerinit = GoRouter(
     ///  =================================================================
     /// ********************** Product related pages Route ******************************
     /// ==================================================================
-    GoRoute(
-      name: AppRoutes.TRENDING_PROD_ROUTE_NAME,
-      path: AppRoutes.TRENDING_PROD_ROUTE_PATH,
-      builder: (BuildContext context, GoRouterState state) {
-        return   const TrendingProducts();
-      },
 
-    ),
     GoRoute(
       name: AppRoutes.PROD_DTL_ROUTE_NAME,
       path: AppRoutes.PROD_DTL_ROUTE_PATH,
@@ -110,17 +99,7 @@ GoRouter routerinit = GoRouter(
       },
 
     ),
-    ///  =================================================================
-    /// ********************** Cart page Route ******************************
-    /// ==================================================================
-    GoRoute(
-      name: AppRoutes.CART_ROUTE_NAME,
-      path: AppRoutes.CART_ROUTE_PATH,
-      builder: (BuildContext context, GoRouterState state) {
-        return   const CartPage();
-      },
 
-    ),
   ],
   errorPageBuilder: (context, state) {
     return const MaterialPage(child: ErrorScreen());

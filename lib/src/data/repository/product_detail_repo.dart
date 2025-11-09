@@ -18,7 +18,7 @@ print("--docDtl.data()--${docDtl.data()}");
     if (doc == {}) {
       throw Exception('Product not found');
     }
-        print("------doc------${doc}");
+        print("------doc------$doc");
                 print("------doc[name]------${doc["name"]}");
                 
                         print("------doc------${doc["id"]}");
@@ -27,6 +27,7 @@ print("--docDtl.data()--${docDtl.data()}");
     return ProductModel.fromJson({...doc,'id' :val });
   }
 
+  @override
   Future<List<Product>> getSimilarProducts(String category, String? currentProductId) async {
     final QuerySnapshot querySnapshot = await _firestore
         .collection('product')
@@ -37,7 +38,7 @@ print("--docDtl.data()--${docDtl.data()}");
     
 
     return querySnapshot.docs
-        .map((doc) => Product.fromMap(doc.data() as Map<String, dynamic>, doc.id ))  //*/
+        .map((doc) => Product.fromMap(doc.data() as Map<String, dynamic>, doc.id  ))  //*/
         .toList();
   }
 
@@ -47,7 +48,7 @@ print("--docDtl.data()--${docDtl.data()}");
     final usersRef = FirebaseFirestore.instance.collection('users');
     
 
-print("-----usersRef-${usersRef}");
+print("-----usersRef-$usersRef");
 
     // Query for documents where email matches
     final querySnapshot = await usersRef.where('email', isEqualTo: userEmail).get();

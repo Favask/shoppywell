@@ -1,4 +1,4 @@
-import 'package:shoppywell/src/comman/colors.dart';
+import 'package:shoppywell/src/common/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData themeLight(BuildContext context) {
@@ -8,7 +8,6 @@ ThemeData themeLight(BuildContext context) {
     disabledColor: ColorLight.disabledButton,
     highlightColor: ColorLight.fontTitle,
     hintColor: ColorLight.fontSubtitle,
-    indicatorColor: ColorLight.primary,
     iconTheme: const IconThemeData(
       color: ColorLight.fontTitle,
     ),
@@ -25,7 +24,7 @@ ThemeData themeLight(BuildContext context) {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
-    ),
+    ), tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
 
   );
 }
@@ -36,7 +35,6 @@ ThemeData themeDark(BuildContext context) {
     cardColor: ColorDark.card,
     disabledColor: ColorDark.disabledButton,
     hintColor: ColorDark.fontSubtitle,
-    indicatorColor: ColorLight.primary,
     iconTheme: const IconThemeData(
       color: ColorDark.fontTitle,
     ),
@@ -53,6 +51,6 @@ ThemeData themeDark(BuildContext context) {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
-    ),
+    ), tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
   );
 }

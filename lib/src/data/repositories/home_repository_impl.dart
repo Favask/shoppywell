@@ -27,7 +27,7 @@ class HomeRepositoryImpl implements HomeRepository {
       return snapshot.docs
           .map((doc) => CategoryModel.fromJson({...doc.data(), 'id': doc.id}))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -43,9 +43,9 @@ class HomeRepositoryImpl implements HomeRepository {
           .get();
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -61,9 +61,9 @@ class HomeRepositoryImpl implements HomeRepository {
           .get();
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -80,9 +80,9 @@ class HomeRepositoryImpl implements HomeRepository {
 
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -99,7 +99,7 @@ class HomeRepositoryImpl implements HomeRepository {
       return snapshot.docs
           .map((doc) => AppBannerModel.fromJson({...doc.data(), 'id': doc.id}))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -119,7 +119,7 @@ class HomeRepositoryImpl implements HomeRepository {
       return snapshot.docs
           .map((doc) => DealModel.fromJson({...doc.data(), 'id': doc.id}))
           .toList();
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -133,10 +133,10 @@ class HomeRepositoryImpl implements HomeRepository {
           .snapshots()
           .map((snapshot) {
             return snapshot.docs
-              .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+              .map((doc) => ProductModel.fromJson(doc.data()))
               .toList();
           });
-    } catch (e, stacktrace) {
+    } catch (e) {
       rethrow;
     }
   }

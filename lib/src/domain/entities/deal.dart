@@ -1,6 +1,5 @@
-import 'package:equatable/equatable.dart';
 
-class Deal extends Equatable {
+class Deal  {
   final String id;
   final String title;
   final String type;
@@ -23,16 +22,5 @@ class Deal extends Equatable {
     required this.badgeText,
   });
 
-  @override
-  List<Object?> get props => [
-        id,
-        title,
-        type,
-        productIds,
-        discountPercentage,
-        startTime,
-        endTime,
-        isActive,
-        badgeText,
-      ];
+
 } 

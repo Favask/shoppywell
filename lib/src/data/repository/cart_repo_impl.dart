@@ -17,7 +17,7 @@ class CartRepositoryImpl extends CartRepository{
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  billingDetails: BillingDetails(
+                  billingDetails: const BillingDetails(
                       name: 'YOUR NAME',
                       email: 'YOUREMAIL@gmail.com',
                       phone: 'YOUR NUMBER',
@@ -53,7 +53,7 @@ class CartRepositoryImpl extends CartRepository{
         Fluttertoast.showToast(
             msg: 'Error from Stripe: ${e.error.localizedMessage}');
       } else {
-        Fluttertoast.showToast(msg: 'Unforeseen error: ${e}');
+        Fluttertoast.showToast(msg: 'Unforeseen error: $e');
       }
     }
   }

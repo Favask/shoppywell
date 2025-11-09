@@ -1,8 +1,7 @@
 // bloc/product_state.dart
-import 'package:equatable/equatable.dart';
 import 'package:shoppywell/src/data/models/product_model.dart';
 
-abstract class ProductState extends Equatable {
+abstract class ProductState  {
   const ProductState();
 
   @override

@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -66,7 +66,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }) {
     try {
       // Simulating API call with Future.delayed
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         // Mock API response (Replace with actual API call)
           onRequestSuccess({"message": "Registration successful", "userId": 123});
       });

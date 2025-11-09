@@ -25,9 +25,9 @@ class ProductModel extends Product {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    print("--ProductModel-json-${json}");
+    print("--ProductModel-json-$json");
     return ProductModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       name: json['name'] as String,
       description: json['description'] as String,
       brand: json['brand'] as String,
@@ -79,7 +79,8 @@ class ProductModel extends Product {
 
 
 class Product  {
-  final String? id;
+  final String? documentId;
+  final int? id;
   final String? name;
   final String? description;
   final String? brand;
@@ -101,6 +102,7 @@ class Product  {
   final bool isTrending;
 
   Product({
+      this.documentId,
       this.id,
       this.name,
       this.description,
@@ -125,7 +127,8 @@ class Product  {
 
    factory Product.fromMap(Map<String, dynamic> map, String documentId) {
     return Product(
-      id: documentId,
+      documentId: documentId,
+      id: map['id'] ?? 0,
       name: map['name'] ?? '',
       description: map['description'] ?? '',
       salePrice: (map['price'] ?? 0).toDouble(),

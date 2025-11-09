@@ -1,6 +1,5 @@
-import 'package:equatable/equatable.dart';
 
-class Review extends Equatable {
+class Review  {
   final String id;
   final String productId;
   final String userId;
@@ -31,20 +30,5 @@ class Review extends Equatable {
     required this.updatedAt,
   });
 
-  @override
-  List<Object?> get props => [
-        id,
-        productId,
-        userId,
-        userName,
-        userPhoto,
-        title,
-        comment,
-        rating,
-        images,
-        isHelpful,
-        isVerifiedPurchase,
-        createdAt,
-        updatedAt,
-      ];
+
 } 

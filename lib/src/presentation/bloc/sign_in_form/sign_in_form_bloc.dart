@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:shoppywell/src/data/repository/authentication_repository_impl.dart';
-import 'package:shoppywell/src/domain/repositories/autentication_repository.dart';
 import 'package:shoppywell/src/domain/usecase/authentication.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_event.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_state.dart';

@@ -1,6 +1,5 @@
-import 'package:equatable/equatable.dart';
 
-class Category extends Equatable {
+class Category {
   final String id;
   final String name;
   final String displayName;

@@ -1,10 +1,7 @@
 part of 'theme_cubit.dart';
 
-abstract class ThemeState extends Equatable {
+abstract class ThemeState{
   const ThemeState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class ThemeLight extends ThemeState {}

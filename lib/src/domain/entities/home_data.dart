@@ -1,10 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:shoppywell/src/data/models/product_model.dart';
 import 'app_banner.dart';
 import 'category.dart';
 import 'deal.dart';
 
-class HomeData extends Equatable {
+class HomeData {
   final List<Category> categories;
   final List<Product> featuredProducts;
   final List<Product> trendingProducts;

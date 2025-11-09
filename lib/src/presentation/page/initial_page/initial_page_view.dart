@@ -1,4 +1,4 @@
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';

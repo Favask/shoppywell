@@ -43,7 +43,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .get();
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
     } catch (e) {
       rethrow;
@@ -61,7 +61,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .get();
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
     } catch (e) {
       rethrow;
@@ -80,7 +80,7 @@ class HomeRepositoryImpl implements HomeRepository {
 
 
       return snapshot.docs
-          .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
     } catch (e) {
       rethrow;
@@ -133,7 +133,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .snapshots()
           .map((snapshot) {
             return snapshot.docs
-              .map((doc) => ProductModel.fromJson({...doc.data(), 'id': doc.id}))
+              .map((doc) => ProductModel.fromJson(doc.data()))
               .toList();
           });
     } catch (e) {

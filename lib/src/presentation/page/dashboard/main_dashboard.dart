@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shoppywell/src/presentation/page/home/home_page.dart';
-import 'package:shoppywell/src/presentation/page/wishlist/wishlist_page.dart';
 import 'package:shoppywell/src/presentation/page/cart/cart_page.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -15,7 +14,6 @@ class _MainDashboardState extends State<MainDashboard> {
   
   final List<Widget> _pages = [
     const HomePage(),
-    const WishlistPage(),
     const CartPage(),
   ];
 
@@ -41,10 +39,7 @@ class _MainDashboardState extends State<MainDashboard> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wishlist',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',

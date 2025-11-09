@@ -6,16 +6,26 @@ class CartRepositoryImpl implements CartRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
+  Future<String> getUserId(String uid) async {
+    final userDoc = await _firestore.collection('users').doc(uid).get();
+    if (!userDoc.exists) {
+      throw Exception('User not found');
+    }
+    final userData = userDoc.data() as Map<String, dynamic>;
+    return userData['uid'];//*/
+  }
+
+  @override
   Future<List<Product>> getCartProducts(String userId) async {
     try {
       // Get user's cart product IDs
-      final userDoc = await _firestore.collection('users').doc(userId).get();
+      final  userDoc = await _firestore.collection('users').doc(userId).get();
       if (!userDoc.exists) {
         throw Exception('User not found');
       }
 
-      final userData = userDoc.data() as Map<String, dynamic>;
-      final cartIds = List<String>.from(userData['cart'] ?? []);
+      final  Map<String, dynamic> userData = userDoc.data() ?? {};
+      final cartIds = List<int>.from(userData['cart'] ?? []);
 
       if (cartIds.isEmpty) {
         return [];
@@ -25,10 +35,10 @@ class CartRepositoryImpl implements CartRepository {
       final products = <Product>[];
       for (final productId in cartIds) {
         try {
-          final productDoc = await _firestore.collection('products').doc(productId).get();
+          final productDoc = await _firestore.collection('products').doc("${productId}").get();
           if (productDoc.exists) {
             final productData = productDoc.data() as Map<String, dynamic>;
-            final product = Product.fromMap(productData, productId);
+            final product = Product.fromMap(productData, productDoc.id);
             products.add(product);
           }
         } catch (e) {
@@ -39,6 +49,7 @@ class CartRepositoryImpl implements CartRepository {
 
       return products;
     } catch (e) {
+      print("-----catch-----$e");
       throw Exception('Failed to fetch cart products: $e');
     }
   }

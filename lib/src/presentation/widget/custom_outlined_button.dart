@@ -1,5 +1,5 @@
-import 'package:shoppywell/src/comman/colors.dart';
-import 'package:shoppywell/src/comman/constant.dart';
+import 'package:shoppywell/src/common/colors.dart';
+import 'package:shoppywell/src/common/constant.dart';
 import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends StatelessWidget {

@@ -19,7 +19,7 @@ class ProductCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 160,
+        width: 190,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
@@ -56,17 +56,7 @@ class ProductCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: GestureDetector(
-                    onTap: onWishlistTap,
-                    child: const Icon(
-                      Icons.favorite_border,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+
               ],
             ),
             Padding(
@@ -76,7 +66,7 @@ class ProductCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     product.name ?? '',
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 14,

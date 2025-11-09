@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_event.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_state.dart';
@@ -91,14 +91,7 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
               color: Colors.grey[500],
             ),
           ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () {
-              // Navigate to home page
-              context.goNamed(AppRoutes.HOME_ROUTE_NAME);
-            },
-            child: const Text('Start Shopping'),
-          ),
+
         ],
       ),
     );

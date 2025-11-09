@@ -5,12 +5,7 @@ import '../../bloc/home/home_event.dart';
 import '../../bloc/home/home_state.dart';
 import '../../widget/banner_carousel_widget.dart';
 import '../../widget/category_list_widget.dart';
-import '../../widget/deal_of_day_widget.dart';
 import '../../widget/product_grid_widget.dart';
-import '../../widget/trending_products_widget.dart';
-import '../../widget/special_offers_widget.dart';
-import '../../widget/flat_and_heels_widget.dart';
-import '../../widget/custom_banner_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,12 +39,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
           },
         ),
         actions: const [
-          // IconButton(
-          //   icon: const Icon(Icons.search),
-          //   onPressed: () {
-          //     // TODO: Implement search functionality
-          //   },
-          // ),
+
         
         ],
       ),
@@ -84,13 +74,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                       print('Banner tapped: $link');
                     },
                   ),
-                  const SizedBox(height: 16.0),
-                  // Deal of the Day
-                  if (state.deals.isNotEmpty && state.featuredProducts.isNotEmpty) // Assuming featured products are shown in Deal of the Day
-                    DealOfDayWidget(
-                      deal: state.deals.first, // Assuming only one active deal for now
-                      products: state.featuredProducts.take(2).toList(), // Show a couple of products from featured for the deal
-                    ),
+
                   const SizedBox(height: 16.0),
                   // Featured Products Grid
                   ProductGridWidget(
@@ -101,67 +85,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                       print('See All Featured tapped');
                     },
                   ),
-                  const SizedBox(height: 16.0),
-                  // Special Offers Section
-                  const SpecialOffersWidget(), // This widget does not depend on fetched data currently
-                  const SizedBox(height: 16.0),
-                  // Flat and Heels Section
-                  // Assuming a specific banner for this section, replace with actual data if available
-                  FlatAndHeelsWidget(
-                    imageUrl: 'https://dummyimage.com/500x400/ff6699/000', // Replace with actual image URL
-                    title: 'Flat and Heels',
-                    subtitle: 'Stand a chance to get rewarded',
-                    ctaText: 'Visit now →',
-                    onCtaTap: () {
-                      // TODO: Implement navigation to Flat and Heels category/listing
-                      print('Flat and Heels Visit now tapped');
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  // Trending Products
-                   TrendingProductsWidget(
-                    products: state.trendingProducts,
-                    onSeeAllTap: () {
-                       // TODO: Implement navigation to trending products listing
-                       print('See All Trending tapped');
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                   // Hot Summer Sale Banner
-                   // Assuming a specific banner for this section, replace with actual data if available
-                   CustomBannerWidget(
-                    imageUrl: 'https://dummyimage.com/500x400/ff6699/000', // Replace with actual image URL
-                     onTap: (){
-                       // TODO: Implement navigation/action for summer sale banner
-                       print('Summer Sale banner tapped');
-                     },
-                   ),
-                   const SizedBox(height: 16.0),
-                  // New Arrivals (Using ProductGridWidget)
-                   ProductGridWidget(
-                    title: 'New Arrivals',
-                    products: state.trendingProducts, // Assuming trending products for New Arrivals for now
-                    onSeeAllTap: () {
-                      // TODO: Implement navigation to new arrivals listing
-                       print('See All New Arrivals tapped');
-                    },
-                  ),
-                   const SizedBox(height: 16.0),
-                ].where((widget) => !(widget is SizedBox && widget.height == 0.0)).toList(), // Filter out SizedBox.shrink() if any widget returns it
-              ),
-            );
-          } else if (state is HomeError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Error: ${state.message}'),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<HomeBloc>().add(const LoadHomeData());
-                    },
-                    child: const Text('Retry'),
-                  ),
+
                 ],
               ),
             );

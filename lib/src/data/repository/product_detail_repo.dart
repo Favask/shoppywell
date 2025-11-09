@@ -38,7 +38,7 @@ print("--docDtl.data()--${docDtl.data()}");
     
 
     return querySnapshot.docs
-        .map((doc) => Product.fromMap(doc.data() as Map<String, dynamic>, doc.id ))  //*/
+        .map((doc) => Product.fromMap(doc.data() as Map<String, dynamic>, doc.id  ))  //*/
         .toList();
   }
 

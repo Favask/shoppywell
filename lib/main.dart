@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:shoppywell/src/comman/themes.dart';
+import 'package:shoppywell/src/common/themes.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/home/home_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/product/product_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/product_detail/product_detail_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_bloc.dart';
-import 'package:shoppywell/src/presentation/bloc/wishlist/wishlist_bloc.dart';
 import 'package:shoppywell/src/presentation/cubit/theme/theme_cubit.dart';
 import 'package:shoppywell/src/utilities/app_bloc_observer.dart';
 import 'package:shoppywell/src/utilities/fire_store_quaries.dart';
@@ -64,7 +63,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductBloc>(create: (_) => ProductBloc()),
         BlocProvider<ProductDetailBloc>(create: (_) => ProductDetailBloc()),
         BlocProvider<CartBloc>(create: (_) => CartBloc()),
-        BlocProvider<WishlistBloc>(create: (_) => WishlistBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

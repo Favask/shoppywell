@@ -1,4 +1,4 @@
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_event.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_state.dart';

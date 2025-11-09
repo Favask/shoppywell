@@ -28,7 +28,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         return;
       }
 
-      final products = await _cartUsecase.getCartProducts(user.uid);
+      final products = await _cartUsecase.getCartProducts("user_001");//*/
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {

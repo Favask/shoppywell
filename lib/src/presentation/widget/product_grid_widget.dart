@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppywell/src/comman/routes.dart';
+import 'package:shoppywell/src/common/routes.dart';
 import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/presentation/widget/product_card_widget.dart';
 

@@ -60,7 +60,7 @@ lib/src/
 │   │   └── product_detail_state.dart  # Updated state with review data
 │   └── page/product/
 │       └── comprehensive_product_detail.dart # Main implementation
-└── comman/
+└── common/
     └── routes.dart                    # Updated with new route
 ```
 

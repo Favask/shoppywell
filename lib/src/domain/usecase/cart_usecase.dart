@@ -9,8 +9,8 @@ class CartUsecase {
     return _repository.getUserId(uid);
   }
 
-  Future<List<Product>> getCartProducts(String userId) {
-    return _repository.getCartProducts(userId);
+  Future<List<Product>> getCartProducts() {
+    return _repository.getCartProducts();
   }
 
   Future<void> addToCart(String userId, String productId, int quantity, {String? size, String? color}) {

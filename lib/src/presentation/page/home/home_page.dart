@@ -55,8 +55,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(), // Allow pull-to-refresh even if content is not full screen
                 children: [
-                                    const SizedBox(height: 16.0),
-
+                  const SizedBox(height: 16.0),
                   // Category Row
                   CategoryListWidget(
                     categories: state.categories,

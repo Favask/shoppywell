@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/domain/repositories/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Future<String> getUserId(String uid) async {
@@ -16,15 +18,24 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<List<Product>> getCartProducts(String userId) async {
+  Future<List<Product>> getCartProducts() async {
     try {
-      // Get user's cart product IDs
-      final  userDoc = await _firestore.collection('users').doc(userId).get();
-      if (!userDoc.exists) {
+
+      final user = _auth.currentUser;
+      if (user == null) {
         throw Exception('User not found');
       }
 
-      final  Map<String, dynamic> userData = userDoc.data() ?? {};
+
+      // Get user's cart product IDs
+      final  userDoc = await _firestore.collection('users')
+          .where('userId', isEqualTo: 'value')
+          .get();
+      if (userDoc.docs.isEmpty) {
+        throw Exception('User not found');
+      }
+
+      final  Map<String, dynamic> userData = userDoc.docs.first.data() ?? {};
       final cartIds = List<int>.from(userData['cart'] ?? []);
 
       if (cartIds.isEmpty) {

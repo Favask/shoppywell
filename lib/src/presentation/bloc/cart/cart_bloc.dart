@@ -28,7 +28,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         return;
       }
 
-      final products = await _cartUsecase.getCartProducts("user_001");//*/
+
+
+      final products = await _cartUsecase.getCartProducts();
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
@@ -65,7 +67,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
       
       // Reload cart after adding
-      final products = await _cartUsecase.getCartProducts(user.uid);
+      final products = await _cartUsecase.getCartProducts();
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
@@ -96,7 +98,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       await _cartUsecase.removeFromCart(user.uid, event.productId);
       
       // Reload cart after removing
-      final products = await _cartUsecase.getCartProducts(user.uid);
+      final products = await _cartUsecase.getCartProducts();
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {
@@ -127,7 +129,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       await _cartUsecase.updateCartItemQuantity(user.uid, event.productId, event.quantity);
       
       // Reload cart after updating
-      final products = await _cartUsecase.getCartProducts(user.uid);
+      final products = await _cartUsecase.getCartProducts();
       if (products.isEmpty) {
         emit(CartEmpty());
       } else {

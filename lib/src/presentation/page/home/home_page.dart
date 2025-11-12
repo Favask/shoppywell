@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/home/home_bloc.dart';
-import '../../bloc/home/home_event.dart';
-import '../../bloc/home/home_state.dart';
-import '../../widget/banner_carousel_widget.dart';
-import '../../widget/category_list_widget.dart';
-import '../../widget/product_grid_widget.dart';
+
 import 'package:shimmer/shimmer.dart';
+import 'package:shoppywell/src/presentation/bloc/home/home_bloc.dart';
+import 'package:shoppywell/src/presentation/bloc/home/home_event.dart';
+import 'package:shoppywell/src/presentation/bloc/home/home_state.dart';
+import 'package:shoppywell/src/presentation/widget/banner_carousel_widget.dart';
+import 'package:shoppywell/src/presentation/widget/category_list_widget.dart';
+import 'package:shoppywell/src/presentation/widget/product_grid_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,7 +51,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
           } else if (state is HomeLoaded) {
             return RefreshIndicator(
               onRefresh: () async {
-                context.read<HomeBloc>().add(const RefreshHomeData());
               },
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(), // Allow pull-to-refresh even if content is not full screen

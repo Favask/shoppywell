@@ -1,4 +1,3 @@
-
 // Cart States
 import 'package:shoppywell/src/data/models/product_model.dart';
 
@@ -12,7 +11,7 @@ class CartLoaded extends CartState {
   final List<Product> products;
   final double totalAmount;
   final int totalItems;
-  
+
   CartLoaded({
     required this.products,
     required this.totalAmount,
@@ -24,17 +23,17 @@ class CartEmpty extends CartState {}
 
 class CartError extends CartState {
   final String message;
-  
+
   CartError(this.message);
 }
 
-// Payment States
-abstract class PaymentState {}
+class PaymentInitial extends CartState {}
 
-class PaymentInitial extends PaymentState {}
-class PaymentLoading extends PaymentState {}
-class PaymentSuccess extends PaymentState {}
-class PaymentFailure extends PaymentState {
+class PaymentLoading extends CartState {}
+
+class PaymentSuccess extends CartState {}
+
+class PaymentFailure extends CartState {
   final String message;
   PaymentFailure(this.message);
 }

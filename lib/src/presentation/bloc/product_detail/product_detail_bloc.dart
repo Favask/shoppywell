@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shoppywell/src/data/repositories/review_repository_impl.dart';
-import 'package:shoppywell/src/domain/usecase/product_detail.dart';
-import 'package:shoppywell/src/domain/usecase/review_usecase.dart';
+import 'package:shoppywell/src/domain/usecases/product_detail.dart';
+import 'package:shoppywell/src/domain/usecases/review_usecase.dart';
 import 'product_detail_event.dart';
 import 'product_detail_state.dart';
 

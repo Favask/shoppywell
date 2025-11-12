@@ -13,20 +13,12 @@ class CartUsecase {
     return _repository.getCartProducts();
   }
 
-  Future<void> addToCart(String userId, String productId, int quantity, {String? size, String? color}) {
+  Future<void> addToCart(String userId, int productId, int quantity, {String? size, String? color}) {
     return _repository.addToCart(userId, productId, quantity, size: size, color: color);
   }
 
-  Future<void> removeFromCart(String userId, String productId) {
+  Future<void> removeFromCart(String userId, int productId) {
     return _repository.removeFromCart(userId, productId);
-  }
-
-  Future<void> updateCartItemQuantity(String userId, String productId, int quantity) {
-    return _repository.updateCartItemQuantity(userId, productId, quantity);
-  }
-
-  Future<void> clearCart(String userId) {
-    return _repository.clearCart(userId);
   }
 
   Future<void> stripeMakePayment() {

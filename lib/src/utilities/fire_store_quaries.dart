@@ -484,278 +484,278 @@
 
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class UserService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collection = 'users';
-
-  // Create user document
-  Future<void> createUser({
-    required String uid,
-    required String email,
-    required String displayName,
-    String? phoneNumber,
-    String? profileImageUrl,
-  }) async {
-    try {
-      final userData = {
-        'uid': uid,
-        'email': email,
-        'displayName': displayName,
-        'phoneNumber': phoneNumber ?? '',
-        'profileImageUrl': profileImageUrl ?? '',
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-        'isActive': true,
-        'addresses': <Map<String, dynamic>>[],
-        'wishlist': <String>[],
-        'cart': <Map<String, dynamic>>[],
-        'orderHistory': <String>[],
-        'loyaltyPoints': 0,
-        'preferences': {
-          'categories': <String>[],
-          'brands': <String>[],
-          'priceRange': {
-            'min': 0,
-            'max': 10000,
-          },
-          'notifications': {
-            'orderUpdates': true,
-            'promotions': true,
-            'newArrivals': false,
-          }
-        },
-        'paymentMethods': <String>[],
-      };
-
-      await _firestore.collection(_collection).doc(uid).set(userData);
-      print('User created successfully: $uid');
-    } catch (e) {
-      print('Error creating user: $e');
-      rethrow;
-    }
-  }
-
-  // Create sample users for testing
-  Future<void> createSampleUsers() async {
-    final sampleUsers = [
-      {
-        'uid': 'user_001',
-        'email': 'john.doe@example.com',
-        'displayName': 'John Doe',
-        'phoneNumber': '+1234567890',
-        'profileImageUrl': 'https://example.com/avatar1.jpg',
-        'addresses': [
-          {
-            'id': 'addr_001',
-            'type': 'home',
-            'name': 'John Doe',
-            'street': '123 Main Street',
-            'city': 'New York',
-            'state': 'NY',
-            'zipCode': '10001',
-            'country': 'USA',
-            'isDefault': true,
-          }
-        ],
-        'wishlist': ['prod_001', 'prod_005', 'prod_012'],
-        'cart': [
-          {
-            'productId': 'prod_003',
-            'quantity': 2,
-            'price': 29.99,
-            'addedAt': Timestamp.now(),
-          }
-        ],
-        'orderHistory': ['order_001', 'order_002'],
-        'loyaltyPoints': 150,
-        'preferences': {
-          'categories': ['electronics', 'books'],
-          'brands': ['apple', 'samsung'],
-          'priceRange': {'min': 0, 'max': 1000},
-          'notifications': {
-            'orderUpdates': true,
-            'promotions': true,
-            'newArrivals': true,
-          }
-        }
-      },
-      {
-        'uid': 'user_002',
-        'email': 'jane.smith@example.com',
-        'displayName': 'Jane Smith',
-        'phoneNumber': '+1987654321',
-        'profileImageUrl': 'https://example.com/avatar2.jpg',
-        'addresses': [
-          {
-            'id': 'addr_002',
-            'type': 'home',
-            'name': 'Jane Smith',
-            'street': '456 Oak Avenue',
-            'city': 'Los Angeles',
-            'state': 'CA',
-            'zipCode': '90210',
-            'country': 'USA',
-            'isDefault': true,
-          },
-          {
-            'id': 'addr_003',
-            'type': 'work',
-            'name': 'Jane Smith',
-            'street': '789 Business Blvd',
-            'city': 'Los Angeles',
-            'state': 'CA',
-            'zipCode': '90211',
-            'country': 'USA',
-            'isDefault': false,
-          }
-        ],
-        'wishlist': ['prod_007', 'prod_015'],
-        'cart': [],
-        'orderHistory': ['order_003'],
-        'loyaltyPoints': 75,
-        'preferences': {
-          'categories': ['fashion', 'beauty'],
-          'brands': ['nike', 'adidas'],
-          'priceRange': {'min': 10, 'max': 500},
-          'notifications': {
-            'orderUpdates': true,
-            'promotions': false,
-            'newArrivals': true,
-          }
-        }
-      }
-    ];
-
-    for (var userData in sampleUsers) {
-      try {
-        final userDoc = {
-          ...userData,
-          'createdAt': FieldValue.serverTimestamp(),
-          'updatedAt': FieldValue.serverTimestamp(),
-          'isActive': true,
-          'paymentMethods': <String>[],
-        };
-
-        await _firestore
-            .collection(_collection)
-            .doc(userData['uid'] as String)
-            .set(userDoc);
-        
-        print('Sample user created: ${userData['displayName']}');
-      } catch (e) {
-        print('Error creating sample user ${userData['displayName']}: $e');
-      }
-    }
-  }
-
-  // Get user by ID
-  Future<Map<String, dynamic>?> getUser(String uid) async {
-    try {
-      final doc = await _firestore.collection(_collection).doc(uid).get();
-      if (doc.exists) {
-        return doc.data();
-      }
-      return null;
-    } catch (e) {
-      print('Error getting user: $e');
-      rethrow;
-    }
-  }
-
-  // Update user profile
-  Future<void> updateUser(String uid, Map<String, dynamic> updates) async {
-    try {
-      updates['updatedAt'] = FieldValue.serverTimestamp();
-      await _firestore.collection(_collection).doc(uid).update(updates);
-      print('User updated successfully: $uid');
-    } catch (e) {
-      print('Error updating user: $e');
-      rethrow;
-    }
-  }
-
-  // Add address to user
-  Future<void> addAddress(String uid, Map<String, dynamic> address) async {
-    try {
-      await _firestore.collection(_collection).doc(uid).update({
-        'addresses': FieldValue.arrayUnion([address]),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      print('Address added successfully');
-    } catch (e) {
-      print('Error adding address: $e');
-      rethrow;
-    }
-  }
-
-  // Add item to wishlist
-  Future<void> addToWishlist(String uid, String productId) async {
-    try {
-      await _firestore.collection(_collection).doc(uid).update({
-        'wishlist': FieldValue.arrayUnion([productId]),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      print('Product added to wishlist');
-    } catch (e) {
-      print('Error adding to wishlist: $e');
-      rethrow;
-    }
-  }
-
-  // Add item to cart
-  Future<void> addToCart(String uid, Map<String, dynamic> cartItem) async {
-    try {
-      cartItem['addedAt'] = Timestamp.now();
-      await _firestore.collection(_collection).doc(uid).update({
-        'cart': FieldValue.arrayUnion([cartItem]),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      print('Product added to cart');
-    } catch (e) {
-      print('Error adding to cart: $e');
-      rethrow;
-    }
-  }
-
-  // Update loyalty points
-  Future<void> updateLoyaltyPoints(String uid, int points) async {
-    try {
-      await _firestore.collection(_collection).doc(uid).update({
-        'loyaltyPoints': FieldValue.increment(points),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      print('Loyalty points updated');
-    } catch (e) {
-      print('Error updating loyalty points: $e');
-      rethrow;
-    }
-  }
-}
-
-// Usage example
-void main() async {
-  final userService = UserService();
-  
-  // Create a new user
-  await userService.createUser(
-    uid: 'user_123',
-    email: 'newuser@example.com',
-    displayName: 'New User',
-    phoneNumber: '+1122334455',
-  );
-  
-  // Create sample users for testing
-  await userService.createSampleUsers();
-  
-  // Add item to cart
-  await userService.addToCart('user_001', {
-    'productId': 'prod_999',
-    'quantity': 1,
-    'price': 49.99,
-  });
-  
-  // Update loyalty points
-  await userService.updateLoyaltyPoints('user_001', 25);
-}
+// import 'package:cloud_firestore/cloud_firestore.dart';
+//
+// class UserService {
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+//   final String _collection = 'users';
+//
+//   // Create user document
+//   Future<void> createUser({
+//     required String uid,
+//     required String email,
+//     required String displayName,
+//     String? phoneNumber,
+//     String? profileImageUrl,
+//   }) async {
+//     try {
+//       final userData = {
+//         'uid': uid,
+//         'email': email,
+//         'displayName': displayName,
+//         'phoneNumber': phoneNumber ?? '',
+//         'profileImageUrl': profileImageUrl ?? '',
+//         'createdAt': FieldValue.serverTimestamp(),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//         'isActive': true,
+//         'addresses': <Map<String, dynamic>>[],
+//         'wishlist': <String>[],
+//         'cart': <Map<String, dynamic>>[],
+//         'orderHistory': <String>[],
+//         'loyaltyPoints': 0,
+//         'preferences': {
+//           'categories': <String>[],
+//           'brands': <String>[],
+//           'priceRange': {
+//             'min': 0,
+//             'max': 10000,
+//           },
+//           'notifications': {
+//             'orderUpdates': true,
+//             'promotions': true,
+//             'newArrivals': false,
+//           }
+//         },
+//         'paymentMethods': <String>[],
+//       };
+//
+//       await _firestore.collection(_collection).doc(uid).set(userData);
+//       print('User created successfully: $uid');
+//     } catch (e) {
+//       print('Error creating user: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Create sample users for testing
+//   Future<void> createSampleUsers() async {
+//     final sampleUsers = [
+//       {
+//         'uid': 'user_001',
+//         'email': 'john.doe@example.com',
+//         'displayName': 'John Doe',
+//         'phoneNumber': '+1234567890',
+//         'profileImageUrl': 'https://example.com/avatar1.jpg',
+//         'addresses': [
+//           {
+//             'id': 'addr_001',
+//             'type': 'home',
+//             'name': 'John Doe',
+//             'street': '123 Main Street',
+//             'city': 'New York',
+//             'state': 'NY',
+//             'zipCode': '10001',
+//             'country': 'USA',
+//             'isDefault': true,
+//           }
+//         ],
+//         'wishlist': ['prod_001', 'prod_005', 'prod_012'],
+//         'cart': [
+//           {
+//             'productId': 'prod_003',
+//             'quantity': 2,
+//             'price': 29.99,
+//             'addedAt': Timestamp.now(),
+//           }
+//         ],
+//         'orderHistory': ['order_001', 'order_002'],
+//         'loyaltyPoints': 150,
+//         'preferences': {
+//           'categories': ['electronics', 'books'],
+//           'brands': ['apple', 'samsung'],
+//           'priceRange': {'min': 0, 'max': 1000},
+//           'notifications': {
+//             'orderUpdates': true,
+//             'promotions': true,
+//             'newArrivals': true,
+//           }
+//         }
+//       },
+//       {
+//         'uid': 'user_002',
+//         'email': 'jane.smith@example.com',
+//         'displayName': 'Jane Smith',
+//         'phoneNumber': '+1987654321',
+//         'profileImageUrl': 'https://example.com/avatar2.jpg',
+//         'addresses': [
+//           {
+//             'id': 'addr_002',
+//             'type': 'home',
+//             'name': 'Jane Smith',
+//             'street': '456 Oak Avenue',
+//             'city': 'Los Angeles',
+//             'state': 'CA',
+//             'zipCode': '90210',
+//             'country': 'USA',
+//             'isDefault': true,
+//           },
+//           {
+//             'id': 'addr_003',
+//             'type': 'work',
+//             'name': 'Jane Smith',
+//             'street': '789 Business Blvd',
+//             'city': 'Los Angeles',
+//             'state': 'CA',
+//             'zipCode': '90211',
+//             'country': 'USA',
+//             'isDefault': false,
+//           }
+//         ],
+//         'wishlist': ['prod_007', 'prod_015'],
+//         'cart': [],
+//         'orderHistory': ['order_003'],
+//         'loyaltyPoints': 75,
+//         'preferences': {
+//           'categories': ['fashion', 'beauty'],
+//           'brands': ['nike', 'adidas'],
+//           'priceRange': {'min': 10, 'max': 500},
+//           'notifications': {
+//             'orderUpdates': true,
+//             'promotions': false,
+//             'newArrivals': true,
+//           }
+//         }
+//       }
+//     ];
+//
+//     for (var userData in sampleUsers) {
+//       try {
+//         final userDoc = {
+//           ...userData,
+//           'createdAt': FieldValue.serverTimestamp(),
+//           'updatedAt': FieldValue.serverTimestamp(),
+//           'isActive': true,
+//           'paymentMethods': <String>[],
+//         };
+//
+//         await _firestore
+//             .collection(_collection)
+//             .doc(userData['uid'] as String)
+//             .set(userDoc);
+//
+//         print('Sample user created: ${userData['displayName']}');
+//       } catch (e) {
+//         print('Error creating sample user ${userData['displayName']}: $e');
+//       }
+//     }
+//   }
+//
+//   // Get user by ID
+//   Future<Map<String, dynamic>?> getUser(String uid) async {
+//     try {
+//       final doc = await _firestore.collection(_collection).doc(uid).get();
+//       if (doc.exists) {
+//         return doc.data();
+//       }
+//       return null;
+//     } catch (e) {
+//       print('Error getting user: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Update user profile
+//   Future<void> updateUser(String uid, Map<String, dynamic> updates) async {
+//     try {
+//       updates['updatedAt'] = FieldValue.serverTimestamp();
+//       await _firestore.collection(_collection).doc(uid).update(updates);
+//       print('User updated successfully: $uid');
+//     } catch (e) {
+//       print('Error updating user: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Add address to user
+//   Future<void> addAddress(String uid, Map<String, dynamic> address) async {
+//     try {
+//       await _firestore.collection(_collection).doc(uid).update({
+//         'addresses': FieldValue.arrayUnion([address]),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//       });
+//       print('Address added successfully');
+//     } catch (e) {
+//       print('Error adding address: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Add item to wishlist
+//   Future<void> addToWishlist(String uid, String productId) async {
+//     try {
+//       await _firestore.collection(_collection).doc(uid).update({
+//         'wishlist': FieldValue.arrayUnion([productId]),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//       });
+//       print('Product added to wishlist');
+//     } catch (e) {
+//       print('Error adding to wishlist: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Add item to cart
+//   Future<void> addToCart(String uid, Map<String, dynamic> cartItem) async {
+//     try {
+//       cartItem['addedAt'] = Timestamp.now();
+//       await _firestore.collection(_collection).doc(uid).update({
+//         'cart': FieldValue.arrayUnion([cartItem]),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//       });
+//       print('Product added to cart');
+//     } catch (e) {
+//       print('Error adding to cart: $e');
+//       rethrow;
+//     }
+//   }
+//
+//   // Update loyalty points
+//   Future<void> updateLoyaltyPoints(String uid, int points) async {
+//     try {
+//       await _firestore.collection(_collection).doc(uid).update({
+//         'loyaltyPoints': FieldValue.increment(points),
+//         'updatedAt': FieldValue.serverTimestamp(),
+//       });
+//       print('Loyalty points updated');
+//     } catch (e) {
+//       print('Error updating loyalty points: $e');
+//       rethrow;
+//     }
+//   }
+// }
+//
+// // Usage example
+// void main() async {
+//   final userService = UserService();
+//
+//   // Create a new user
+//   await userService.createUser(
+//     uid: 'user_123',
+//     email: 'newuser@example.com',
+//     displayName: 'New User',
+//     phoneNumber: '+1122334455',
+//   );
+//
+//   // Create sample users for testing
+//   await userService.createSampleUsers();
+//
+//   // Add item to cart
+//   await userService.addToCart('user_001', {
+//     'productId': 'prod_999',
+//     'quantity': 1,
+//     'price': 49.99,
+//   });
+//
+//   // Update loyalty points
+//   await userService.updateLoyaltyPoints('user_001', 25);
+// }

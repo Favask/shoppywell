@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoppywell/src/common/routes.dart';
+import 'package:shoppywell/src/data/models/product_model.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_bloc.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_event.dart';
 import 'package:shoppywell/src/presentation/bloc/cart/cart_state.dart';
@@ -29,12 +30,7 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Cart'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete_outline),
-            onPressed: () => _showClearCartDialog(),
-          ),
-        ],
+
       ),
       body: BlocListener<CartBloc, CartState>(
         listener: (context, state) {
@@ -91,7 +87,12 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
               color: Colors.grey[500],
             ),
           ),
-
+          ElevatedButton(
+            onPressed: () {
+              context.read<CartBloc>().add(LoadCart());
+            },
+            child: const Text('Try Again'),
+          )
         ],
       ),
     );
@@ -157,7 +158,7 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
     );
   }
 
-  Widget _buildCartItem(product) {
+  Widget _buildCartItem(Product product) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: Padding(
@@ -167,7 +168,7 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-                product.image,
+                product.images.first,
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -187,50 +188,28 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.name ?? '',
                     style: Theme.of(context).textTheme.titleMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '₹${product.price.toStringAsFixed(2)}',
+                    '₹${product.salePrice?.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove),
-                        onPressed: () {
-                          // Decrease quantity
-                          context.read<CartBloc>().add(
-                            UpdateCartItemQuantity(product.id, 0), // Remove item
-                          );
-                        },
-                      ),
-                      const Text('1'), // For now, showing 1 as quantity
-                      IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () {
-                          // Increase quantity
-                          context.read<CartBloc>().add(
-                            AddToCart(productId: product.id, quantity: 1),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+
                 ],
               ),
             ),
             IconButton(
               icon: const Icon(Icons.delete_outline, color: Colors.red),
               onPressed: () {
-                context.read<CartBloc>().add(RemoveFromCart(product.id));
+                context.read<CartBloc>().add(RemoveFromCart(product.id??0));
               },
             ),
           ],
@@ -286,30 +265,6 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin<
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showClearCartDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Clear Cart'),
-        content: const Text('Are you sure you want to clear your cart? This action cannot be undone.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<CartBloc>().add(ClearCart());
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Clear'),
           ),
         ],
       ),

@@ -104,40 +104,4 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 
-  @override
-  Future<List<Deal>> getActiveDeals() async {
-    try {
-      final now = Timestamp.now();
-      final snapshot = await _firestore
-          .collection('deals')
-          .where('isActive', isEqualTo: true)
-          .where('endTime', isGreaterThan: now)
-          .orderBy('endTime')
-          .limit(5)
-          .get();
-
-      return snapshot.docs
-          .map((doc) => DealModel.fromJson({...doc.data(), 'id': doc.id}))
-          .toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Stream<List<Product>> getProductsStream() {
-    try {
-      return _firestore
-          .collection('products')
-          .where('isActive', isEqualTo: true)
-          .snapshots()
-          .map((snapshot) {
-            return snapshot.docs
-              .map((doc) => ProductModel.fromJson(doc.data()))
-              .toList();
-          });
-    } catch (e) {
-      rethrow;
-    }
-  }
 } 

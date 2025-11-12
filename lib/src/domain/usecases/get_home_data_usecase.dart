@@ -9,16 +9,11 @@ class GetHomeDataUsecase {
   Future<HomeData> call() async {
     final categories = await repository.getCategories();
     final featuredProducts = await repository.getFeaturedProducts();
-    final trendingProducts = await repository.getTrendingProducts();
     final banners = await repository.getActiveBanners();
-    final deals = await repository.getActiveDeals();
-
     return HomeData(
       categories: categories,
       featuredProducts: featuredProducts,
-      trendingProducts: trendingProducts,
       banners: banners,
-      deals: deals,
     );
   }
 } 

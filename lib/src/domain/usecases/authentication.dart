@@ -1,4 +1,4 @@
-import 'package:shoppywell/src/data/repository/authentication_repository_impl.dart';
+import 'package:shoppywell/src/data/repositories/authentication_repository_impl.dart';
 import 'package:shoppywell/src/domain/repositories/autentication_repository.dart';
 
 class AuthenticationUseCase {

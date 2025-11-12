@@ -23,7 +23,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.example.shoppywell"
-    compileSdk = 35
+    compileSdk = 36
 
 
     compileOptions {

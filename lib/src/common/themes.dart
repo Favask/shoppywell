@@ -24,8 +24,8 @@ ThemeData themeLight(BuildContext context) {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
-    ), tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
-
+    ),
+    tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
   );
 }
 
@@ -51,6 +51,7 @@ ThemeData themeDark(BuildContext context) {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
-    ), tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
+    ),
+    tabBarTheme: const TabBarThemeData(indicatorColor: ColorLight.primary),
   );
 }

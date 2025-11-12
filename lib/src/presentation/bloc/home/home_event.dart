@@ -8,18 +8,7 @@ class LoadHomeData extends HomeEvent {
   const LoadHomeData();
 }
 
-class RefreshHomeData extends HomeEvent {
-  const RefreshHomeData();
+class LoadCart extends HomeEvent {
+  const LoadCart();
 }
 
-class LoadMoreProducts extends HomeEvent {
-  const LoadMoreProducts();
-}
-
-class SelectCategory extends HomeEvent {
-  final String categoryId;
-
-  const SelectCategory(this.categoryId);
-
-
-} 

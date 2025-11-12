@@ -8,9 +8,6 @@ import '../entities/deal.dart';
 abstract class HomeRepository {
   Future<List<Category>> getCategories();
   Future<List<Product>> getFeaturedProducts();
-  Future<List<Product>> getTrendingProducts();
-  Future<List<Product>> getProductsByCategory(String categoryId);
   Future<List<AppBanner>> getActiveBanners();
-  Future<List<Deal>> getActiveDeals();
-  Stream<List<Product>> getProductsStream();
+
 } 

@@ -2,13 +2,12 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:shoppywell/src/domain/usecase/authentication.dart';
+import 'package:shoppywell/src/domain/usecases/authentication.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_event.dart';
 import 'package:shoppywell/src/presentation/bloc/sign_in_form/sign_in_form_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppywell/src/utilities/constants.dart';
 import 'package:shoppywell/src/utilities/shared_prefs_helper.dart';
-
 
 
 
